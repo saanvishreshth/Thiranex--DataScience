@@ -1,0 +1,35 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Load dataset
+df = pd.read_csv("sales_data.csv")
+
+# Handle missing values
+df.fillna(df.mean(numeric_only=True), inplace=True)
+
+# Remove duplicates
+df.drop_duplicates(inplace=True)
+
+# Remove outliers using IQR
+Q1 = df['Sales'].quantile(0.25)
+Q3 = df['Sales'].quantile(0.75)
+IQR = Q3 - Q1
+
+df = df[(df['Sales'] >= Q1 - 1.5*IQR) &
+        (df['Sales'] <= Q3 + 1.5*IQR)]
+
+# Bar Chart
+sales_by_category = df.groupby('Category')['Sales'].sum()
+
+plt.figure(figsize=(8,5))
+sales_by_category.plot(kind='bar')
+plt.title("Sales by Category")
+plt.ylabel("Sales")
+plt.show()
+
+# Heatmap
+plt.figure(figsize=(6,4))
+sns.heatmap(df.corr(numeric_only=True), annot=True)
+plt.show()

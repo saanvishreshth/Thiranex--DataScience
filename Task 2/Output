@@ -1,0 +1,17 @@
+Dataset Preview:
+   Area  Bedrooms  Bathrooms   Price
+0  1200         2          2  250000
+1  1500         3          2  320000
+2  1800         3          3  400000
+3  2000         4          3  450000
+4  2200         4          4  500000
+
+Model Evaluation
+MAE: 15000.45
+MSE: 320000000.50
+R2 Score: 0.96
+
+Model saved as prediction_model.pkl
+
+Predicted House Price:
+670000.25
